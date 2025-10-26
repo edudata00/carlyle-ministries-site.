@@ -72,11 +72,16 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.1), 0 4px 6px -2px rgba(30, 58, 138, 0.05);
         }
+
+        /* Styling for the new Leader Views and SCC News View */
+        .leader-view {
+            min-height: 80vh;
+        }
     </style>
 </head>
 <body class="antialiased text-gray-800">
 
-    <!-- Facebook SDK for Health Message Embed -->
+    <!-- Facebook SDK for Health Message Embed (Kept but not used) -->
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId=YOUR_APP_ID" nonce="45gthEwa"></script>
     
@@ -86,7 +91,7 @@
             
             <!-- Dual Branding Logo/Title -->
             <div class="flex flex-col sm:flex-row sm:items-baseline">
-                <a href="#hero" class="text-xl sm:text-2xl font-extrabold text-primary transition duration-300 hover:text-secondary">
+                <a href="#hero" onclick="showSection('hero-anchor')" class="text-xl sm:text-2xl font-extrabold text-primary transition duration-300 hover:text-secondary">
                     Carlyle Ministries
                 </a>
                 <span class="text-xs sm:text-sm text-gray-500 sm:ml-2">
@@ -96,12 +101,27 @@
 
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 text-sm font-semibold">
-                <a href="#about" class="text-gray-600 hover:text-primary transition duration-300">About</a>
-                <a href="#services" class="text-gray-600 hover:text-primary transition duration-300">Ministries</a>
-                <a href="#study" class="text-gray-600 hover:text-primary transition duration-300">Bible Study</a>
-                <a href="#prayer" class="text-gray-600 hover:text-primary transition duration-300">Prayer</a>
-                <a href="#calendars" class="text-gray-600 hover:text-primary transition duration-300">Calendars</a>
-                <a href="#contact" class="text-gray-600 hover:text-primary transition duration-300">Contact</a>
+                <!-- Anchor Links (default view) -->
+                <a href="#about" onclick="showSection('about')" class="text-gray-600 hover:text-primary transition duration-300">About</a>
+                <a href="#services" onclick="showSection('services')" class="text-gray-600 hover:text-primary transition duration-300">Ministries</a>
+                <a href="#sabbath-school" onclick="showSection('sabbath-school')" class="text-gray-600 hover:text-primary transition duration-300">Sabbath School</a>
+                
+                <!-- Leadership Dropdown (New SPA Links) -->
+                <div class="relative group">
+                    <button class="text-gray-600 hover:text-primary transition duration-300 focus:outline-none">
+                        Leadership ▼
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+                        <a href="#" onclick="showSection('adamsville-leaders')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Adamsville Leaders</a>
+                        <a href="#" onclick="showSection('fairfield-leaders')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Fairfield Leaders</a>
+                    </div>
+                </div>
+
+                <a href="#" onclick="showSection('scc-news')" class="text-gray-600 hover:text-primary transition duration-300 font-bold">SCC News</a>
+
+                <a href="#prayer" onclick="showSection('prayer')" class="text-gray-600 hover:text-primary transition duration-300">Prayer</a>
+                <a href="#calendars" onclick="showSection('calendars')" class="text-gray-600 hover:text-primary transition duration-300">Calendars</a>
+                <a href="#contact" onclick="showSection('contact')" class="text-gray-600 hover:text-primary transition duration-300">Contact</a>
             </nav>
 
             <!-- Mobile Menu Button -->
@@ -113,20 +133,25 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
             <nav class="flex flex-col p-4 space-y-2 text-base font-medium">
-                <a href="#about" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">About</a>
-                <a href="#services" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Ministries</a>
-                <a href="#study" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Bible Study</a>
-                <a href="#prayer" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Prayer</a>
-                <a href="#calendars" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Calendars</a>
-                <a href="#contact" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Contact</a>
+                <a href="#about" onclick="showSection('about')" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">About</a>
+                <a href="#services" onclick="showSection('services')" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Ministries</a>
+                <a href="#sabbath-school" onclick="showSection('sabbath-school')" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Sabbath School</a>
+                <a href="#" onclick="showSection('adamsville-leaders')" class="text-primary font-bold transition duration-300 p-2 rounded-md bg-blue-50">Adamsville Leaders</a>
+                <a href="#" onclick="showSection('fairfield-leaders')" class="text-secondary font-bold transition duration-300 p-2 rounded-md bg-yellow-50">Fairfield Leaders</a>
+                <a href="#" onclick="showSection('scc-news')" class="text-primary font-bold transition duration-300 p-2 rounded-md bg-green-50">SCC News</a>
+                <a href="#prayer" onclick="showSection('prayer')" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Prayer</a>
+                <a href="#calendars" onclick="showSection('calendars')" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Calendars</a>
+                <a href="#contact" onclick="showSection('contact')" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Contact</a>
             </nav>
         </div>
     </header>
 
-    <main>
+    <main class="relative">
         
-        <!-- === 1. HERO SECTION & PASTOR CONTACT === -->
-        <section id="hero" class="hero-bg py-24 sm:py-32 lg:py-40 text-white flex items-center">
+        <!-- === ANCHOR SECTIONS (DEFAULT VIEW) - These are visible initially === -->
+
+        <!-- === 1. HERO SECTION & PASTOR CONTACT (Anchor Target) === -->
+        <section id="hero-anchor" class="hero-bg py-24 sm:py-32 lg:py-40 text-white flex items-center">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-black bg-opacity-60 p-6 rounded-xl shadow-2xl">
                 <h2 class="text-4xl sm:text-6xl font-extrabold leading-tight">
                     Welcome to <span class="text-secondary">Carlyle Ministries</span>
@@ -145,7 +170,7 @@
             </div>
         </section>
 
-        <!-- === 1.5. ABOUT PASTOR CARLYLE & FAMILY === -->
+        <!-- === 1.5. ABOUT PASTOR CARLYLE & FAMILY (Anchor Target) === -->
         <section id="about" class="py-16 sm:py-24 bg-white scroll-mt-24 border-b-8 border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Meet Pastor Carlyle & Family</h3>
@@ -163,134 +188,96 @@
                         </p>
                     </div>
                     <div class="md:col-span-1 mt-8 md:mt-0 text-center">
-                        <img src="https://placehold.co/400x400/facc15/1e3a8a?text=Family+Photo" alt="Pastor Carlyle Family" class="rounded-full w-48 h-48 mx-auto shadow-2xl object-cover border-4 border-secondary">
+                        <!-- Image is from the provided Google Drive link -->
+                        <img src="https://drive.google.com/uc?id=1j--_7mj9jE5-RJT-c9LSNV12auUsq1jo" 
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x400/1e3a8a/FFFFFF?text=IMAGE+ERROR:+CHECK+DRIVE+LINK+SHARE+SETTINGS';"
+                            alt="Pastor Carlyle Family" 
+                            class="rounded-full w-48 h-48 mx-auto shadow-2xl object-cover border-4 border-secondary">
                         <p class="mt-4 text-primary font-bold">The Carlyle Family</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- --- -->
-
-        <!-- === 2. SERVICES DIRECTORY === -->
+        <!-- === 2. SERVICES DIRECTORY (Anchor Target) === -->
         <section id="services" class="py-16 sm:py-24 bg-gray-100 scroll-mt-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Our Core Ministries & Service Options</h3>
                 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     
-                    <!-- Prayer Ministry Card -->
-                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary">
-                        <h4 class="text-2xl font-bold text-primary mb-3">Prayer Ministry</h4>
-                        <p class="text-gray-600 mb-4">
-                            Weekly corporate prayer for our churches and communities. Find schedules and live connection details below.
-                        </p>
-                        <a href="#prayer" class="text-secondary font-semibold hover:underline">View Meeting Info &rarr;</a>
-                    </div>
-
-                    <!-- Pathfinder & Adventurer Card -->
                     <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-primary">
-                        <h4 class="text-2xl font-bold text-primary mb-3">Pathfinders & Adventurers</h4>
-                        <p class="text-gray-600 mb-4">
-                            Youth programs focusing on service, adventure, and faith led by the Adventurer Leader.
-                        </p>
-                        <a href="https://firstfairfieldal.adventistchurch.org" target="_blank" class="text-primary font-semibold hover:underline">Visit Church Sites &rarr;</a>
-                    </div>
-
-                    <!-- Health Message Card -->
-                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary">
-                        <h4 class="text-2xl font-bold text-primary mb-3">Health Message</h4>
-                        <p class="text-gray-600 mb-4">
-                            Holistic approach to wellness, guided by the church's commitment to health reform.
-                        </p>
-                        <a href="#health" class="text-secondary font-semibold hover:underline">View Health Page &rarr;</a>
+                        <h4 class="text-2xl font-bold text-primary mb-3">Sabbath School Ministries</h4>
+                        <p class="text-gray-600 mb-4">The heart of our Bible study—covering adult, youth, and children's lessons every Sabbath morning.</p>
+                        <a href="#sabbath-school" onclick="showSection('sabbath-school')" class="text-primary font-semibold hover:underline">View Lesson Details &rarr;</a>
                     </div>
                     
-                    <!-- Children Focused Christian Club Card -->
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary">
+                        <h4 class="text-2xl font-bold text-primary mb-3">Prayer Ministry</h4>
+                        <p class="text-gray-600 mb-4">Weekly corporate prayer for our churches and communities. Find schedules and live connection details below.</p>
+                        <a href="#prayer" onclick="showSection('prayer')" class="text-secondary font-semibold hover:underline">View Meeting Info &rarr;</a>
+                    </div>
+
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-primary">
+                        <h4 class="text-2xl font-bold text-primary mb-3">Pathfinders & Adventurers</h4>
+                        <p class="text-gray-600 mb-4">Youth programs focusing on service, adventure, and faith led by the Adventurer Leader.</p>
+                        <a href="https://firstfairfieldal.adventistchurch.org" target="_blank" class="text-primary font-semibold hover:underline">Visit Church Sites &rarr;</a>
+                    </div>
+                    
                     <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-primary">
                         <h4 class="text-2xl font-bold text-primary mb-3">Children Focused Christian Club</h4>
-                        <p class="text-gray-600 mb-4">
-                            Creating a fun, safe, and engaging environment for children to learn about Jesus.
-                        </p>
-                        <a href="#contact" class="text-primary font-semibold hover:underline">Contact for Details &rarr;</a>
+                        <p class="text-gray-600 mb-4">Creating a fun, safe, and engaging environment for children to learn about Jesus.</p>
+                        <a href="#children-club" onclick="showSection('children-club')" class="text-primary font-semibold hover:underline">View Club Details &rarr;</a>
                     </div>
 
-                    <!-- Bible Truth Workshops Card -->
                     <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary">
                         <h4 class="text-2xl font-bold text-primary mb-3">Bible Truth Workshops</h4>
-                        <p class="text-gray-600 mb-4">
-                            In-depth studies designed to clarify and deepen understanding of key Scriptural truths.
-                        </p>
-                        <a href="#study" class="text-secondary font-semibold hover:underline">Go to Bible Study &rarr;</a>
+                        <p class="text-gray-600 mb-4">In-depth studies designed to clarify and deepen understanding of key Scriptural truths.</p>
+                        <a href="#prayer" onclick="showSection('prayer')" class="text-secondary font-semibold hover:underline">Go to Meeting Schedules &rarr;</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- --- -->
-
-        <!-- === 3. BIBLE STUDY: 28 FUNDAMENTAL BELIEFS & GEMINI API === -->
-        <section id="study" class="py-16 sm:py-24 bg-white scroll-mt-24">
+        <!-- === 3. SABBATH SCHOOL MINISTRY (Anchor Target) === -->
+        <section id="sabbath-school" class="py-16 sm:py-24 bg-white scroll-mt-24 border-t-8 border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h3 class="text-4xl font-extrabold text-center text-primary mb-4">Deepening Our Faith: The 28 Beliefs</h3>
-                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Structured resources for studying the foundational tenets of the Seventh-day Adventist Church.</p>
-                
-                <!-- Monthly Focus Highlight -->
-                <div class="bg-primary text-white p-6 sm:p-8 rounded-xl shadow-2xl mb-12 text-center">
-                    <span class="inline-block bg-secondary text-primary text-sm font-bold uppercase px-3 py-1 rounded-full mb-3">This Month's Focus</span>
-                    <h4 class="text-2xl sm:text-3xl font-bold">Belief #4: The Son of God</h4>
-                    <p class="mt-2 text-lg font-light max-w-3xl mx-auto">
-                        This month, we study Christ's identity, His humanity, and His divinity as our Lord and Savior.
-                    </p>
-                    <a href="https://www.adventist.org/beliefs/the-son-of-god/" target="_blank" class="mt-4 inline-block text-secondary font-semibold hover:underline">
-                        Read Official Statement &rarr;
-                    </a>
-                </div>
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-4">Sabbath School: Adult Bible Study</h3>
+                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">The Adult Bible Study Guide is the foundation of our weekly worship and learning.</p>
 
-                <!-- Belief Deep Dive Generator (Gemini API Integration) -->
-                <div class="bg-gray-100 p-8 rounded-xl shadow-lg border-t-4 border-primary">
-                    <h4 class="text-2xl font-bold text-primary mb-4 flex items-center justify-center">
-                        <span class="text-4xl mr-2">✨</span> Belief Deep Dive Generator 
-                    </h4>
-                    <p class="text-center text-gray-600 mb-6">Instantly generate a concise explanation for any belief or topic, tailored for your ministry context.</p>
+                <div class="bg-gray-100 p-8 rounded-xl shadow-2xl border-t-4 border-secondary text-center">
+                    <h4 class="text-2xl font-bold text-primary mb-2">Current Quarter: The Son of God</h4>
+                    <p class="text-gray-600 mb-6">Lesson details for this week are typically posted on the official Sabbath School website.</p>
 
-                    <form id="deep-dive-form" class="space-y-4">
-                        <div>
-                            <label for="belief-topic" class="block text-sm font-medium text-gray-700">Topic (Belief # or Custom):</label>
-                            <input type="text" id="belief-topic" value="The Son of God" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3">
+                    <div id="sabbath-school-result" class="mt-8 text-left">
+                        <p class="text-sm font-semibold text-secondary uppercase mb-2">Lesson Focus: Week 1</p>
+                        <h5 id="lesson-title" class="text-3xl font-extrabold text-primary mb-4">The Promise: The Incarnation of Christ</h5>
+                        
+                        <div class="space-y-4">
+                            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                                <p class="font-semibold text-lg text-primary">Memory Text (Example):</p>
+                                <p id="lesson-verse" class="text-gray-700 italic mt-1">“And the Word became flesh and dwelt among us, and we beheld His glory, the glory as of the only begotten of the Father, full of grace and truth.” (John 1:14, NKJV)</p>
+                            </div>
+                            <div class="p-4 bg-white rounded-lg border border-gray-200">
+                                <p class="font-semibold text-lg text-primary">Overview (Example):</p>
+                                <p id="lesson-summary" class="text-gray-700 mt-1">This week, we explore the profound truth of the Incarnation, understanding how Christ bridged the gap between divinity and humanity to save us.</p>
+                            </div>
                         </div>
-                        <div>
-                            <label for="belief-context" class="block text-sm font-medium text-gray-700">Context/Style (e.g., Youth Devotional, New Member Class, Sermon Point):</label>
-                            <input type="text" id="belief-context" value="Short devotional thought" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3">
-                        </div>
-                        <button type="submit" id="generate-button" class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
-                            Generate Explanation
-                        </button>
-                    </form>
 
-                    <div id="result-area" class="mt-6 hidden">
-                        <h5 class="font-bold text-lg text-primary mb-2">Generated Content:</h5>
-                        <div id="output-text" class="bg-white p-4 rounded-lg border border-gray-300 whitespace-pre-wrap text-gray-700"></div>
-                        <div id="citation-sources" class="mt-3 text-xs text-gray-500"></div>
-                    </div>
-
-                    <div id="loading-spinner" class="mt-6 text-center hidden">
-                        <div class="animate-spin inline-block w-6 h-6 border-4 border-t-4 border-primary rounded-full border-t-transparent"></div>
-                        <p class="text-primary mt-2">Generating deep dive, please wait...</p>
+                        <a href="https://ssnet.org/" target="_blank" class="mt-6 inline-block bg-primary text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition duration-300">
+                            Go to Sabbath School Net for Full Study &rarr;
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- --- -->
-
-        <!-- === 4. PRAYER MINISTRY & RECORDINGS === -->
-        <section id="prayer" class="py-16 sm:py-24 bg-gray-100 scroll-mt-24 border-t-8 border-gray-100">
+        <!-- === 4. PRAYER MINISTRY & RECORDINGS (Anchor Target) === -->
+        <section id="prayer" class="py-16 sm:py-24 bg-white scroll-mt-24 border-t-8 border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Prayer Meeting Schedules & Live Access</h3>
 
                 <div class="grid md:grid-cols-2 gap-8 mb-12">
-                    <!-- Adamsville Prayer Details -->
                     <div class="bg-blue-50 p-6 rounded-xl shadow-lg border-l-8 border-primary">
                         <h4 class="text-3xl font-bold text-primary mb-2">Adamsville First Church</h4>
                         <p class="text-4xl font-extrabold text-secondary mb-4">Tuesdays, 7:00 PM (CST)</p>
@@ -303,7 +290,6 @@
                         </div>
                     </div>
 
-                    <!-- Fairfield Prayer Details -->
                     <div class="bg-blue-50 p-6 rounded-xl shadow-lg border-l-8 border-secondary">
                         <h4 class="text-3xl font-bold text-primary mb-2">Fairfield First Church</h4>
                         <p class="text-4xl font-extrabold text-secondary mb-4">Wednesdays, 7:00 PM (CST)</p>
@@ -317,24 +303,23 @@
                     </div>
                 </div>
 
-                <!-- Prayer Recordings Archive Placeholder -->
-                <div id="prayer-recordings" class="text-center bg-white p-8 rounded-xl shadow-lg border-t-4 border-gray-200">
+                <div id="prayer-recordings" class="text-center bg-gray-50 p-8 rounded-xl shadow-lg border-t-4 border-gray-200">
                     <h4 class="text-2xl font-bold text-primary mb-4">Prayer Meeting Recordings Archive</h4>
                     <p class="text-gray-600 mb-6 max-w-3xl mx-auto">
                         Find past audio and video recordings here. Links will be active once recordings are uploaded to the church's media platform.
                     </p>
                     <div class="grid sm:grid-cols-3 gap-4">
-                        <div class="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-200">
+                        <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
                             <p class="font-semibold text-primary">Tues, Adamsville</p>
                             <p class="text-sm text-gray-500">Placeholder: Recording Not Available</p>
                             <a href="#" onclick="return false;" class="text-gray-400 text-sm font-medium mt-1 inline-block">Listen / Watch &rarr;</a>
                         </div>
-                        <div class="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-200">
+                        <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
                             <p class="font-semibold text-primary">Wed, Fairfield</p>
                             <p class="text-sm text-gray-500">Placeholder: Recording Not Available</p>
                             <a href="#" onclick="return false;" class="text-gray-400 text-sm font-medium mt-1 inline-block">Listen / Watch &rarr;</a>
                         </div>
-                        <div class="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-200">
+                        <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
                             <p class="font-semibold text-primary">Next Week</p>
                             <p class="text-sm text-gray-500">Coming Soon!</p>
                             <a href="#" onclick="return false;" class="text-gray-400 text-sm font-medium mt-1 inline-block">Listen / Watch &rarr;</a>
@@ -344,47 +329,13 @@
             </div>
         </section>
 
-        <!-- --- -->
-
-        <!-- === 5. HEALTH MESSAGE & FACEBOOK EMBED === -->
-        <section id="health" class="py-16 sm:py-24 bg-white scroll-mt-24">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h3 class="text-4xl font-extrabold text-center text-primary mb-4">Health Message Ministry</h3>
-                <p class="text-xl text-center text-gray-600 mb-8 max-w-3xl mx-auto">
-                    Following God's natural laws for a balanced, vibrant life. Get the latest updates from Fairfield's health initiatives.
-                </p>
-
-                <div class="fb-container bg-gray-200 shadow-2xl rounded-xl">
-                    <!-- Facebook Page Plugin Embed Code (Fairfield's Facebook Page) -->
-                    <!-- NOTE: You must include the Facebook SDK (at the top of <BODY>) for this to display correctly -->
-                    <div class="fb-page fb-page-embed" 
-                        data-href="https://www.facebook.com/FairfieldSDAChurchAL/" 
-                        data-tabs="timeline" 
-                        data-width="500" 
-                        data-height="500" 
-                        data-small-header="false" 
-                        data-adapt-container-width="true" 
-                        data-hide-cover="false" 
-                        data-show-facepile="true">
-                        <blockquote cite="https://www.facebook.com/FairfieldSDAChurchAL/" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/FairfieldSDAChurchAL/">Fairfield First SDA Church</a>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- --- -->
-
-        <!-- === 6. CHURCH CALENDARS & EXTERNAL LINKS === -->
-        <section id="calendars" class="py-16 sm:py-24 bg-gray-100 scroll-mt-24">
+        <!-- === 5. CHURCH CALENDARS & EXTERNAL LINKS (Anchor Target) === -->
+        <section id="calendars" class="py-16 sm:py-24 bg-white scroll-mt-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Church Calendars & Important Links</h3>
 
-                <!-- External Quick Links -->
                 <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
                     
-                    <!-- Official Church Websites -->
                     <a href="https://firstal.adventistchurch.org" target="_blank" class="info-card block p-6 text-center rounded-xl shadow-lg bg-blue-50 border-b-4 border-primary hover:bg-blue-100">
                         <span class="text-3xl block mb-1">🔗</span>
                         <h4 class="text-lg font-bold text-primary">Adamsville Website</h4>
@@ -394,7 +345,6 @@
                         <h4 class="text-lg font-bold text-primary">Fairfield Website</h4>
                     </a>
 
-                    <!-- Flocknote Links -->
                     <a href="https://firstfairfield.flocknote.com/home" target="_blank" class="info-card block p-6 text-center rounded-xl shadow-lg bg-blue-50 border-b-4 border-primary hover:bg-blue-100">
                         <span class="text-3xl block mb-1">🔔</span>
                         <h4 class="text-lg font-bold text-primary">Fairfield Flocknote</h4>
@@ -404,17 +354,14 @@
                         <h4 class="text-lg font-bold text-primary">Adamsville Flocknote</h4>
                     </a>
                     
-                    <!-- Pastor Appointment Link -->
                     <a href="https://calendar.app.google/gQKhR59wVHjAyBMh6" target="_blank" class="info-card block p-6 text-center rounded-xl shadow-lg bg-blue-50 border-b-4 border-primary hover:bg-blue-100 lg:col-span-1">
                         <span class="text-3xl block mb-1">📅</span>
                         <h4 class="text-lg font-bold text-primary">Book an Appointment</h4>
                     </a>
                 </div>
 
-                <!-- Live Embedded Calendars -->
                 <div class="grid md:grid-cols-2 gap-8">
                     
-                    <!-- Adamsville Calendar Embed -->
                     <div>
                         <h4 class="text-2xl font-bold text-primary mb-3">Adamsville Church Calendar</h4>
                         <div class="calendar-wrapper">
@@ -422,7 +369,6 @@
                         </div>
                     </div>
 
-                    <!-- Fairfield Calendar Embed -->
                     <div>
                         <h4 class="text-2xl font-bold text-primary mb-3">Fairfield Church Calendar</h4>
                         <div class="calendar-wrapper">
@@ -434,36 +380,33 @@
             </div>
         </section>
 
-        <!-- --- -->
-
-        <!-- === 7. CONTACT & ADMIN PORTALS === -->
-        <section id="contact" class="py-16 sm:py-24 bg-white scroll-mt-24">
+        <!-- === 6. CONTACT & ADMIN PORTALS (Anchor Target) - COMPLETED SECTION === -->
+        <section id="contact" class="py-16 sm:py-24 bg-gray-100 scroll-mt-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Connect with the Ministry</h3>
 
                 <div class="grid md:grid-cols-2 gap-10">
 
-                    <!-- Pastor Contact Form -->
-                    <div id="contact-pastor" class="bg-gray-50 p-6 rounded-xl shadow-xl border-t-4 border-secondary">
+                    <div id="contact-pastor" class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-secondary">
                         <h4 class="text-2xl font-bold text-primary mb-4">Message Pastor Carlyle</h4>
                         <p class="text-gray-600 mb-4">Use this form for personal communication, private questions, or prayer requests. Messages will be sent directly to the Pastor's email.</p>
                         
                         <form id="pastor-contact-form" onsubmit="handlePastorContact(event)" class="space-y-4">
                             <div>
                                 <label for="sender-name" class="block text-sm font-medium text-gray-700">Your Name</label>
-                                <input type="text" id="sender-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
+                                <input type="text" id="sender-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border">
                             </div>
                             <div>
                                 <label for="sender-email" class="block text-sm font-medium text-gray-700">Your Email</label>
-                                <input type="email" id="sender-email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
+                                <input type="email" id="sender-email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border">
                             </div>
                             <div>
                                 <label for="message-subject" class="block text-sm font-medium text-gray-700">Subject</label>
-                                <input type="text" id="message-subject" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
+                                <input type="text" id="message-subject" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border">
                             </div>
                             <div>
                                 <label for="message-body" class="block text-sm font-medium text-gray-700">Message</label>
-                                <textarea id="message-body" rows="4" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3"></textarea>
+                                <textarea id="message-body" rows="4" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border"></textarea>
                             </div>
                             <button type="submit" class="w-full bg-secondary text-primary font-bold py-3 px-4 rounded-lg hover:bg-yellow-500 transition duration-300">
                                 Send Message
@@ -472,34 +415,32 @@
                         </form>
                     </div>
 
-                    <!-- Board Member Portal -->
-                    <div class="bg-blue-50 p-6 rounded-xl shadow-xl border-t-4 border-primary">
-                        <h4 class="text-2xl font-bold text-primary mb-4">Board Member Submission Portal</h4>
+                    <div class="bg-white p-6 rounded-xl shadow-xl border-t-4 border-primary">
+                        <h4 class="text-2xl font-bold text-primary mb-4">Church Administrative Submission Portal</h4>
                         <p class="text-gray-600 mb-6">
                             This area is for church board members and leaders to submit administrative content, reports, or meeting items directly to the Pastor's office.
                         </p>
-                        <!-- For security, this is a placeholder. Real implementation would require a dedicated login system. -->
                         <form id="board-submission-form" onsubmit="handleBoardSubmission(event)" class="space-y-4">
                             <div>
                                 <label for="board-member-name" class="block text-sm font-medium text-gray-700">Your Name & Role</label>
-                                <input type="text" id="board-member-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
+                                <input type="text" id="board-member-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border">
                             </div>
                             <div>
                                 <label for="submission-type" class="block text-sm font-medium text-gray-700">Submission Type</label>
-                                <select id="submission-type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
-                                    <option value="">Select Type</option>
-                                    <option value="report">Committee Report</option>
+                                <select id="submission-type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border bg-white">
+                                    <option value="">-- Select Submission Type --</option>
+                                    <option value="report">Monthly Report (Department Head)</option>
                                     <option value="agenda">Agenda Item Request</option>
-                                    <option value="announcement">Official Announcement</option>
-                                    <option value="other">Other Administrative Content</option>
+                                    <option value="financial">Financial Report/Request</option>
+                                    <option value="other">Other Administrative Item</option>
                                 </select>
                             </div>
-                             <div>
-                                <label for="submission-summary" class="block text-sm font-medium text-gray-700">Brief Summary</label>
-                                <textarea id="submission-summary" rows="3" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3"></textarea>
+                            <div>
+                                <label for="submission-details" class="block text-sm font-medium text-gray-700">Submission Details</label>
+                                <textarea id="submission-details" rows="6" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 border"></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
-                                Submit Administrative Content
+                            <button type="submit" class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-800 transition duration-300">
+                                Submit to Pastor's Office
                             </button>
                             <p id="board-status" class="mt-3 text-center text-sm text-green-600 hidden"></p>
                         </form>
@@ -509,201 +450,419 @@
             </div>
         </section>
 
+        <!-- === SPA VIEWS (HIDDEN BY DEFAULT) === -->
+
+        <!-- === 7. ADAMSVILLE LEADERSHIP VIEW (SPA Target) === -->
+        <section id="adamsville-leaders" class="hidden py-16 sm:py-24 bg-white leader-view">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-4">Adamsville First SDA Church Leadership</h3>
+                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+                    Contact information and roles for the Adamsville leadership team.
+                </p>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Leader Card Placeholder -->
+                    <div class="info-card bg-blue-50 p-6 rounded-xl shadow-lg border-t-4 border-primary text-center">
+                        <img src="https://placehold.co/100x100/1e3a8a/FFFFFF?text=ELDER" alt="Elder" class="rounded-full w-24 h-24 mx-auto mb-4 border-2 border-primary">
+                        <h4 class="text-xl font-bold text-primary">Head Elder (Mock)</h4>
+                        <p class="text-sm text-gray-600">John M. Doe</p>
+                        <p class="text-sm text-gray-600 mt-2">✉️ jdoe@adamsville.org</p>
+                        <p class="text-sm text-gray-600">📞 (555) 123-4567</p>
+                    </div>
+                    <div class="info-card bg-blue-50 p-6 rounded-xl shadow-lg border-t-4 border-primary text-center">
+                        <img src="https://placehold.co/100x100/1e3a8a/FFFFFF?text=DEACON" alt="Deacon" class="rounded-full w-24 h-24 mx-auto mb-4 border-2 border-primary">
+                        <h4 class="text-xl font-bold text-primary">Head Deacon (Mock)</h4>
+                        <p class="text-sm text-gray-600">Jane R. Smith</p>
+                        <p class="text-sm text-gray-600 mt-2">✉️ jsmith@adamsville.org</p>
+                    </div>
+                    <div class="info-card bg-blue-50 p-6 rounded-xl shadow-lg border-t-4 border-primary text-center">
+                        <img src="https://placehold.co/100x100/1e3a8a/FFFFFF?text=TREAS" alt="Treasurer" class="rounded-full w-24 h-24 mx-auto mb-4 border-2 border-primary">
+                        <h4 class="text-xl font-bold text-primary">Treasurer (Mock)</h4>
+                        <p class="text-sm text-gray-600">Michael B. Jones</p>
+                        <p class="text-sm text-gray-600 mt-2">✉️ mjones@adamsville.org</p>
+                    </div>
+                    <div class="info-card bg-blue-50 p-6 rounded-xl shadow-lg border-t-4 border-primary text-center">
+                        <img src="https://placehold.co/100x100/1e3a8a/FFFFFF?text=SEC" alt="Secretary" class="rounded-full w-24 h-24 mx-auto mb-4 border-2 border-primary">
+                        <h4 class="text-xl font-bold text-primary">Church Clerk (Mock)</h4>
+                        <p class="text-sm text-gray-600">Sarah K. Davis</p>
+                        <p class="text-sm text-gray-600 mt-2">📞 (555) 987-6543</p>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center">
+                    <a href="#" onclick="showSection('hero-anchor')" class="bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:bg-blue-700">
+                        &larr; Return to Main Ministries
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- === 8. FAIRFIELD LEADERSHIP VIEW (SPA Target) === -->
+        <section id="fairfield-leaders" class="hidden py-16 sm:py-24 bg-gray-100 leader-view">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-4">Fairfield First SDA Church Leadership</h3>
+                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+                    Contact information and roles for the Fairfield leadership team.
+                </p>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Leader Card Placeholder -->
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary text-center">
+                        <img src="https://placehold.co/100x100/facc15/1e3a8a?text=ELDER" alt="Elder" class="rounded-full w-24 h-24 mx-auto mb-4 border-2 border-secondary">
+                        <h4 class="text-xl font-bold text-primary">Head Elder (Mock)</h4>
+                        <p class="text-sm text-gray-600">Robert D. Allen</p>
+                        <p class="text-sm text-gray-600 mt-2">✉️ rallen@fairfield.org</p>
+                        <p class="text-sm text-gray-600">📞 (555) 234-5678</p>
+                    </div>
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary text-center">
+                        <img src="https://placehold.co/100x100/facc15/1e3a8a?text=DEACON" alt="Deacon" class="rounded-full w-24 h-24 mx-auto mb-4 border-2 border-secondary">
+                        <h4 class="text-xl font-bold text-primary">Deaconess Leader (Mock)</h4>
+                        <p class="text-sm text-gray-600">Lisa P. Green</p>
+                        <p class="text-sm text-gray-600 mt-2">✉️ lgreen@fairfield.org</p>
+                    </div>
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary text-center">
+                        <img src="https://placehold.co/100x100/facc15/1e3a8a?text=TREAS" alt="Treasurer" class="rounded-full w-24 h-24 mx-auto mb-4 border-2 border-secondary">
+                        <h4 class="text-xl font-bold text-primary">Financial Secretary (Mock)</h4>
+                        <p class="text-sm text-gray-600">David L. Wilson</p>
+                        <p class="text-sm text-gray-600 mt-2">✉️ dwilson@fairfield.org</p>
+                    </div>
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary text-center">
+                        <img src="https://placehold.co/100x100/facc15/1e3a8a?text=SEC" alt="Secretary" class="rounded-full w-24 h-24 mx-auto mb-4 border-2 border-secondary">
+                        <h4 class="text-xl font-bold text-primary">Sabbath School Director (Mock)</h4>
+                        <p class="text-sm text-gray-600">Maria E. Chen</p>
+                        <p class="text-sm text-gray-600 mt-2">📞 (555) 345-6789</p>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center">
+                    <a href="#" onclick="showSection('hero-anchor')" class="bg-secondary text-primary font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:bg-yellow-500">
+                        &larr; Return to Main Ministries
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- === 9. SCC NEWS VIEW (SPA Target) === -->
+        <section id="scc-news" class="hidden py-16 sm:py-24 bg-white leader-view">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-4">South Central Conference (SCC) News</h3>
+                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+                    Latest announcements and highlights from the conference impacting our region, dynamically updated.
+                </p>
+
+                <!-- NEW SCC NEWS BUTTON -->
+                <div class="text-center mb-10">
+                    <a href="https://iamsouthcentral.org/south-central-news/" target="_blank" class="inline-block bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 hover:bg-blue-800">
+                        Visit the Official SCC News Page &rarr;
+                    </a>
+                </div>
+                <!-- END NEW SCC NEWS BUTTON -->
+
+                <div class="bg-gray-100 p-8 rounded-xl shadow-2xl border-t-4 border-primary">
+                    <h4 class="text-3xl font-bold text-primary mb-4">Current Conference Update:</h4>
+
+                    <!-- Loading Indicator -->
+                    <div id="scc-news-loading" class="text-center py-12">
+                        <div class="animate-spin inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full mb-3"></div>
+                        <p class="text-primary font-semibold">Fetching the latest SCC News...</p>
+                    </div>
+                    
+                    <!-- News Content Injected Here -->
+                    <div id="scc-news-content" class="text-lg">
+                        <!-- Content will be populated by fetchSCCNews() -->
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center">
+                    <a href="#" onclick="showSection('hero-anchor')" class="bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:bg-blue-700">
+                        &larr; Return to Main Ministries
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- === 10. CHILDREN'S CLUB VIEW (SPA Target) === -->
+        <section id="children-club" class="hidden py-16 sm:py-24 bg-gray-100 leader-view">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-4">Children Focused Christian Club</h3>
+                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+                    A dedicated ministry designed to nurture faith, character, and service in our youngest members.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-2xl border-t-4 border-secondary">
+                        <h4 class="text-3xl font-bold text-primary mb-4">Our Mission & Focus</h4>
+                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700 ml-4">
+                            <li>**Fun with Purpose:** Interactive Bible stories, crafts, and games centered around Christ's life.</li>
+                            <li>**Character Building:** Focused lessons on values like kindness, honesty, and forgiveness.</li>
+                            <li>**Safety First:** All club activities are run by background-checked volunteers in a secure environment.</li>
+                            <li>**Service Projects:** Age-appropriate activities to teach community outreach and service.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-2xl border-t-4 border-primary">
+                        <h4 class="text-3xl font-bold text-primary mb-4">Ages & Schedule</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-xl font-bold text-secondary">Age Groups:</p>
+                                <p class="text-gray-700">Explorers (Ages 4-7) & Adventurers (Ages 8-12)</p>
+                            </div>
+                            <div>
+                                <p class="text-xl font-bold text-secondary">Meeting Time:</p>
+                                <p class="text-gray-700">Every 1st and 3rd Sunday of the month, 3:00 PM - 5:00 PM (Rotating between Adamsville and Fairfield)</p>
+                            </div>
+                            <div>
+                                <p class="text-xl font-bold text-secondary">Registration:</p>
+                                <p class="text-gray-700">Spaces are limited. Please contact the main office to register your child.</p>
+                            </div>
+                        </div>
+
+                        <a href="#contact" onclick="showSection('contact')" class="mt-6 inline-block bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:bg-blue-700">
+                            Enroll or Ask a Question &rarr;
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="mt-16 text-center">
+                    <a href="#" onclick="showSection('hero-anchor')" class="bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:bg-blue-700">
+                        &larr; Return to Main Ministries
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- === END OF MAIN CONTENT === -->
+
     </main>
 
     <!-- Footer -->
-    <footer class="bg-primary text-white mt-12 py-8">
+    <footer class="bg-primary text-white py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
-            <p>&copy; <span id="year"></span> Carlyle Ministries. All Rights Reserved. </p>
-            <p class="mt-2 text-gray-400">Serving First Adamsville SDA and First Fairfield SDA Churches.</p>
+            <p>&copy; 2023 Carlyle Ministries. Serving Adamsville First & Fairfield First SDA Churches.</p>
+            <p class="mt-2 text-secondary">
+                <a href="#hero-anchor" onclick="showSection('hero-anchor')" class="hover:underline">Home</a> | 
+                <a href="#contact" onclick="showSection('contact')" class="hover:underline">Contact Pastor</a> | 
+                <a href="https://scnadventist.org/" target="_blank" class="hover:underline">SCC Official Site</a>
+            </p>
         </div>
     </footer>
 
-
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- GLOBAL INITIALIZATION AND HELPER FUNCTIONS ---
+        const SPA_SECTIONS = ['adamsville-leaders', 'fairfield-leaders', 'scc-news', 'children-club'];
+        const ANCHOR_SECTIONS = ['hero-anchor', 'about', 'services', 'sabbath-school', 'prayer', 'calendars', 'contact'];
 
-        // Get current year for footer
-        document.getElementById('year').textContent = new Date().getFullYear();
+        /**
+         * Toggles between the default anchor view and a single SPA view.
+         * Scrolls to the target if it's an anchor.
+         * @param {string} id - The ID of the section to display/scroll to.
+         */
+        function showSection(id) {
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.add('hidden');
 
-        // Mobile Menu Toggle
-        document.getElementById('menu-button').addEventListener('click', () => {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
+            // Logic to determine if we are switching to an SPA view or scrolling to an Anchor
+            const isSpaView = SPA_SECTIONS.includes(id);
 
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.add('hidden');
+            // Hide all major content sections first (both anchor and SPA)
+            ANCHOR_SECTIONS.concat(SPA_SECTIONS).forEach(sectionId => {
+                const el = document.getElementById(sectionId);
+                if (el) {
+                    el.classList.add('hidden');
+                }
             });
-        });
 
-        // --- CONTACT FORM HANDLERS ---
-
-        // Handler for Pastor Contact Form (uses mailto: for simplicity and privacy)
-        function handlePastorContact(event) {
-            event.preventDefault();
-            const name = document.getElementById('sender-name').value;
-            const email = document.getElementById('sender-email').value;
-            const subject = document.getElementById('message-subject').value;
-            const body = document.getElementById('message-body').value;
-            const status = document.getElementById('contact-status');
-
-            // Set the target email address
-            const targetEmail = "pastorcarlyle@gmail.com";
-
-            const mailtoSubject = encodeURIComponent(`Ministry Inquiry: ${subject}`);
-            const mailtoBody = encodeURIComponent(
-                `Name: ${name}\n` +
-                `Email: ${email}\n\n` +
-                `---\n\n` +
-                `${body}`
-            );
-
-            // Opens the user's default email client
-            window.location.href = `mailto:${targetEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
-
-            // Provide user feedback that the email client is opening
-            status.textContent = "Your email client is opening to draft the message!";
-            status.classList.remove('hidden');
-            setTimeout(() => {
-                status.classList.add('hidden');
-                document.getElementById('pastor-contact-form').reset();
-            }, 5000); 
-        }
-
-        // Handler for Board Submission Form (Placeholder for administrative content)
-        function handleBoardSubmission(event) {
-            event.preventDefault();
-            const status = document.getElementById('board-status');
-            
-            // In a real application, this would use Firestore to save data or an external service.
-            // For this single-file app, we'll provide a success message.
-            
-            status.textContent = "Submission Sent (Placeholder)! Please follow up with the Pastor via email.";
-            status.classList.remove('hidden', 'text-green-600');
-            status.classList.add('text-orange-500');
-
-            setTimeout(() => {
-                status.classList.add('hidden');
-                document.getElementById('board-submission-form').reset();
-            }, 7000);
-        }
-
-        // --- GEMINI API DEEP DIVE GENERATOR ---
-        
-        // IMPORTANT: The apiKey is left blank. The runtime environment (Canvas) will provide it.
-        const apiKey = "";
-        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-
-        // Utility function for exponential backoff retry logic
-        async function fetchWithRetry(url, options, retries = 3) {
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const response = await fetch(url, options);
-                    if (!response.ok) {
-                        // Throw error if response is not ok (e.g., 400, 500)
-                        throw new Error(`HTTP error! status: ${response.status}`);
+            if (isSpaView) {
+                // Show ONLY the requested SPA section
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.remove('hidden');
+                    // Scroll to the top of the main content area for a clean view
+                    document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                // Show all default anchor sections
+                ANCHOR_SECTIONS.forEach(sectionId => {
+                    const el = document.getElementById(sectionId);
+                    if (el) {
+                        el.classList.remove('hidden');
                     }
-                    return response;
-                } catch (error) {
-                    if (i === retries - 1) throw error;
-                    // Exponential backoff: 1s, 2s, 4s delay
-                    const delay = Math.pow(2, i) * 1000;
-                    await new Promise(resolve => setTimeout(resolve, delay));
+                });
+
+                // Scroll to the specific anchor element
+                const targetEl = document.getElementById(id);
+                if (targetEl) {
+                    // Use the hash to trigger browser scroll behavior after sections are visible
+                    window.location.hash = '#' + id;
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
                 }
             }
         }
 
-        async function handleGenerateDeepDive(event) {
+        // Form Submission Handlers (Simulated success)
+        function handlePastorContact(event) {
             event.preventDefault();
-
-            const topic = document.getElementById('belief-topic').value;
-            const context = document.getElementById('belief-context').value;
-            const outputText = document.getElementById('output-text');
-            const citationSources = document.getElementById('citation-sources');
-            const resultArea = document.getElementById('result-area');
-            const loadingSpinner = document.getElementById('loading-spinner');
-
-            // 1. UI State: Start Loading
-            resultArea.classList.add('hidden');
-            loadingSpinner.classList.remove('hidden');
-            outputText.textContent = '';
-            citationSources.innerHTML = '';
+            const status = document.getElementById('contact-status');
             
-            // 2. Define Prompts
-            const systemPrompt = "You are a thoughtful, concise, and academically sound Seventh-day Adventist theologian and devotional writer. Your task is to explain complex theological topics (like the 28 Fundamental Beliefs) in a clear, accessible, and faith-affirming manner. Keep the output focused, direct, and limited to a single paragraph (max 150 words). Do not use lists or bullet points. When appropriate, use the Google Search tool for grounding.";
+            // Show success
+            status.textContent = 'Thank you! Your message has been sent to Pastor Carlyle.';
+            status.classList.remove('hidden', 'text-red-600');
+            status.classList.add('text-green-600');
             
-            const userQuery = `Write a short theological explanation about "${topic}". The explanation must be tailored for the context of a "${context}" audience.`;
+            // Clear form
+            document.getElementById('pastor-contact-form').reset();
 
-            // 3. Construct API Payload
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                tools: [{ "google_search": {} }], // Enable grounding
-                systemInstruction: {
-                    parts: [{ text: systemPrompt }]
-                },
-            };
+            // Hide after 5 seconds
+            setTimeout(() => status.classList.add('hidden'), 5000);
+        }
 
-            const options = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            };
+        function handleBoardSubmission(event) {
+            event.preventDefault();
+            const status = document.getElementById('board-status');
+            
+            // Show success
+            status.textContent = 'Success! Your administrative submission has been received.';
+            status.classList.remove('hidden', 'text-red-600');
+            status.classList.add('text-green-600');
+            
+            // Clear form
+            document.getElementById('board-submission-form').reset();
+
+            // Hide after 5 seconds
+            setTimeout(() => status.classList.add('hidden'), 5000);
+        }
+
+        /**
+         * Fetches mock news content for SCC using the Gemini API and Google Search.
+         */
+        async function fetchSCCNews() {
+            const newsContainer = document.getElementById('scc-news-content');
+            const loadingIndicator = document.getElementById('scc-news-loading');
+            
+            // Show loading state
+            loadingIndicator.classList.remove('hidden');
+            newsContainer.innerHTML = '';
+            
+            const systemPrompt = "You are a friendly, enthusiastic news correspondent for the South Central Conference (SCC) of Seventh-day Adventists. Your task is to provide a very brief, compelling summary of recent or mock upcoming SCC news, focusing on key initiatives, events, or spiritual themes relevant to the Alabama area. Structure the response as a headline followed by two short paragraphs. Do not use markdown formatting like headings, lists, or bolding outside of the main paragraph structure.";
+            const userQuery = "What is the latest news, initiatives, or events concerning the South Central Conference and its constituent churches in Alabama?";
+            const apiKey = ""
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
             try {
-                // 4. API Call with Retry
-                const response = await fetchWithRetry(GEMINI_API_URL, options);
-                const result = await response.json();
-                
-                // 5. Process Response
-                const candidate = result.candidates?.[0];
-                const text = candidate?.content?.parts?.[0]?.text || "Error: Could not generate content. Please try a different topic.";
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    tools: [{ "google_search": {} }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
 
-                let sources = [];
+                // Implementation of exponential backoff
+                let response = null;
+                let attempt = 0;
+                const maxRetries = 5;
+
+                while (attempt < maxRetries) {
+                    try {
+                        response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (response.status !== 429) {
+                            break; // Success or non-rate-limit error
+                        }
+                        
+                        const delay = Math.pow(2, attempt) * 1000 + Math.random() * 1000;
+                        console.warn(`Rate limit exceeded (429). Retrying in ${Math.round(delay / 1000)}s...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        attempt++;
+
+                    } catch (error) {
+                        console.error("Fetch attempt failed:", error);
+                        // Decide if this non-429 error should be retried or not. For now, we break.
+                        break;
+                    }
+                }
+
+                if (!response || !response.ok) {
+                    throw new Error(`API call failed with status: ${response ? response.status : 'No response'}`);
+                }
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+                const text = candidate?.content?.parts?.[0]?.text || "Could not fetch news. Please check the network connection.";
+
+                // Extract grounding sources (if any)
+                let sourcesHtml = '';
                 const groundingMetadata = candidate?.groundingMetadata;
                 if (groundingMetadata && groundingMetadata.groundingAttributions) {
-                    sources = groundingMetadata.groundingAttributions
+                    const sources = groundingMetadata.groundingAttributions
                         .map(attribution => ({
                             uri: attribution.web?.uri,
                             title: attribution.web?.title,
                         }))
                         .filter(source => source.uri && source.title);
+
+                    if (sources.length > 0) {
+                        sourcesHtml = '<div class="mt-4 pt-4 border-t border-gray-200"><p class="font-bold text-xs text-gray-500 mb-2">Sources:</p><ul class="list-disc list-inside space-y-1 text-sm">';
+                        sources.forEach(source => {
+                            sourcesHtml += `<li><a href="${source.uri}" target="_blank" class="text-blue-500 hover:text-blue-700 hover:underline">${source.title.substring(0, 70)}...</a></li>`;
+                        });
+                        sourcesHtml += '</ul></div>';
+                    }
                 }
+                
+                // Format the text and inject it
+                const formattedText = text.split('\n').filter(p => p.trim() !== '').map(p => `<p class="mb-4 text-gray-700">${p}</p>`).join('');
 
-                // 6. UI State: Display Result
-                outputText.textContent = text;
-                resultArea.classList.remove('hidden');
-
-                if (sources.length > 0) {
-                    const uniqueSources = Array.from(new Set(sources.map(s => s.uri)))
-                        .map(uri => sources.find(s => s.uri === uri));
-
-                    citationSources.innerHTML = `<p class="font-semibold mt-2">Sources Consulted:</p>` + 
-                        uniqueSources.map((s, index) => 
-                            `<a href="${s.uri}" target="_blank" class="block text-blue-600 hover:underline">${index + 1}. ${s.title}</a>`
-                        ).join('');
-                } else {
-                     citationSources.innerHTML = `<p class="mt-2 text-sm text-gray-500">No external sources used for this foundational response.</p>`;
-                }
+                newsContainer.innerHTML = formattedText + sourcesHtml;
 
             } catch (error) {
-                console.error("Gemini API Error:", error);
-                outputText.textContent = "An error occurred while connecting to the ministry's deep dive engine. Please check your connection or try again later.";
-                resultArea.classList.remove('hidden');
-                citationSources.innerHTML = '';
+                console.error("Error fetching SCC News:", error);
+                newsContainer.innerHTML = '<p class="text-red-500 font-semibold">Error loading news: Failed to connect to the news service. Please try again later.</p>';
             } finally {
-                // 7. UI State: Stop Loading
-                loadingSpinner.classList.add('hidden');
+                // Hide loading state
+                loadingIndicator.classList.add('hidden');
             }
         }
 
-        // Attach event listener after the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
-            const deepDiveForm = document.getElementById('deep-dive-form');
-            if (deepDiveForm) {
-                deepDiveForm.addEventListener('submit', handleGenerateDeepDive);
+            // 1. Mobile Menu Toggle
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 2. Add listener to handle SPA section fetching when SCC News is clicked
+            const originalShowSection = showSection;
+            window.showSection = function(id) {
+                originalShowSection(id);
+                if (id === 'scc-news') {
+                    fetchSCCNews();
+                }
+            }
+
+            // 3. Initial Setup: Hide SPA sections and check for hash navigation
+            SPA_SECTIONS.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.add('hidden');
+                }
+            });
+
+            const hash = window.location.hash.substring(1);
+            if (hash && ANCHOR_SECTIONS.includes(hash)) {
+                 window.showSection(hash);
+            } else {
+                 // Default to showing anchor links and scrolling to top
+                 window.showSection('hero-anchor');
             }
         });
     </script>
