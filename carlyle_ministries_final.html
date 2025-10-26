@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlyle Ministries - Adamsville & Fairfield SDA</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Styles and Branding */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Light background */
+        }
+        .text-primary { color: #1e3a8a; } /* Deep Blue */
+        .bg-primary { background-color: #1e3a8a; }
+        .text-secondary { color: #facc15; } /* Gold/Yellow Accent */
+        .bg-secondary { background-color: #facc15; }
+        
+        /* Smooth scrolling padding for fixed header */
+        .scroll-mt-24 {
+            scroll-margin-top: 6rem; /* Adjust based on header height */
+        }
+
+        /* Hero image effect (placeholder for professional image) */
+        .hero-bg {
+            background-image: url('https://placehold.co/1200x600/1e3a8a/facc15?text=Carlyle+Ministries');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Facebook Embed Custom Styling (to fit container) */
+        .fb-container {
+            position: relative;
+            height: 500px; /* Fixed height for display */
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+        .fb-page-embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Responsive Calendar Wrapper */
+        .calendar-wrapper {
+            position: relative;
+            padding-bottom: 75%; /* 4:3 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .calendar-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Custom Card Styles */
+        .info-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.1), 0 4px 6px -2px rgba(30, 58, 138, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Facebook SDK for Health Message Embed -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId=YOUR_APP_ID" nonce="45gthEwa"></script>
+    
+    <!-- Navigation Bar (Sticky and Dual-Branded) -->
+    <header id="navbar" class="bg-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            
+            <!-- Dual Branding Logo/Title -->
+            <div class="flex flex-col sm:flex-row sm:items-baseline">
+                <a href="#hero" class="text-xl sm:text-2xl font-extrabold text-primary transition duration-300 hover:text-secondary">
+                    Carlyle Ministries
+                </a>
+                <span class="text-xs sm:text-sm text-gray-500 sm:ml-2">
+                    Serving First Adamsville & First Fairfield SDA
+                </span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 text-sm font-semibold">
+                <a href="#about" class="text-gray-600 hover:text-primary transition duration-300">About</a>
+                <a href="#services" class="text-gray-600 hover:text-primary transition duration-300">Ministries</a>
+                <a href="#study" class="text-gray-600 hover:text-primary transition duration-300">Bible Study</a>
+                <a href="#prayer" class="text-gray-600 hover:text-primary transition duration-300">Prayer</a>
+                <a href="#calendars" class="text-gray-600 hover:text-primary transition duration-300">Calendars</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary transition duration-300">Contact</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-button" class="md:hidden p-2 rounded-md text-primary focus:outline-none focus:ring-2 focus:ring-primary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <nav class="flex flex-col p-4 space-y-2 text-base font-medium">
+                <a href="#about" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">About</a>
+                <a href="#services" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Ministries</a>
+                <a href="#study" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Bible Study</a>
+                <a href="#prayer" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Prayer</a>
+                <a href="#calendars" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Calendars</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary transition duration-300 p-2 rounded-md">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- === 1. HERO SECTION & PASTOR CONTACT === -->
+        <section id="hero" class="hero-bg py-24 sm:py-32 lg:py-40 text-white flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-black bg-opacity-60 p-6 rounded-xl shadow-2xl">
+                <h2 class="text-4xl sm:text-6xl font-extrabold leading-tight">
+                    Welcome to <span class="text-secondary">Carlyle Ministries</span>
+                </h2>
+                <p class="mt-4 text-xl sm:text-2xl font-light max-w-2xl">
+                    Leading God's people at First Adamsville and First Fairfield SDA Churches.
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                    <a href="https://calendar.app.google/gQKhR59wVHjAyBMh6" target="_blank" class="bg-secondary text-primary font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-xl">
+                        Schedule a Home Visit/Appointment
+                    </a>
+                    <a href="#contact-pastor" class="bg-primary border-2 border-secondary text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:bg-white hover:text-primary">
+                        Email Pastor Carlyle
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- === 1.5. ABOUT PASTOR CARLYLE & FAMILY === -->
+        <section id="about" class="py-16 sm:py-24 bg-white scroll-mt-24 border-b-8 border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Meet Pastor Carlyle & Family</h3>
+                <div class="md:grid md:grid-cols-3 gap-8 items-center">
+                    <div class="md:col-span-2 text-lg space-y-4">
+                        <p class="font-semibold text-xl text-primary">A Ministry Rooted in Family</p>
+                        <p>
+                            Pastor Carlyle's ministry is a shared, family endeavor. He is dedicated to serving the communities of Adamsville and Fairfield, believing strongly in building faith-based homes and vibrant church families.
+                        </p>
+                        <p>
+                            He is supported by his wife, a licensed **Real Estate Agent** and experienced **Teacher**, who brings her professional and educational skills to the church. She also serves in the crucial role of the **Adventurer Leader**, guiding the spiritual and social development of our young people.
+                        </p>
+                        <p>
+                            Together, they are raising **three children** who are actively involved in the life and outreach of the church, exemplifying the value of serving God together.
+                        </p>
+                    </div>
+                    <div class="md:col-span-1 mt-8 md:mt-0 text-center">
+                        <img src="https://placehold.co/400x400/facc15/1e3a8a?text=Family+Photo" alt="Pastor Carlyle Family" class="rounded-full w-48 h-48 mx-auto shadow-2xl object-cover border-4 border-secondary">
+                        <p class="mt-4 text-primary font-bold">The Carlyle Family</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- -->
+
+        <!-- === 2. SERVICES DIRECTORY === -->
+        <section id="services" class="py-16 sm:py-24 bg-gray-100 scroll-mt-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Our Core Ministries & Service Options</h3>
+                
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Prayer Ministry Card -->
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary">
+                        <h4 class="text-2xl font-bold text-primary mb-3">Prayer Ministry</h4>
+                        <p class="text-gray-600 mb-4">
+                            Weekly corporate prayer for our churches and communities. Find schedules and live connection details below.
+                        </p>
+                        <a href="#prayer" class="text-secondary font-semibold hover:underline">View Meeting Info &rarr;</a>
+                    </div>
+
+                    <!-- Pathfinder & Adventurer Card -->
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-primary">
+                        <h4 class="text-2xl font-bold text-primary mb-3">Pathfinders & Adventurers</h4>
+                        <p class="text-gray-600 mb-4">
+                            Youth programs focusing on service, adventure, and faith led by the Adventurer Leader.
+                        </p>
+                        <a href="https://firstfairfieldal.adventistchurch.org" target="_blank" class="text-primary font-semibold hover:underline">Visit Church Sites &rarr;</a>
+                    </div>
+
+                    <!-- Health Message Card -->
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary">
+                        <h4 class="text-2xl font-bold text-primary mb-3">Health Message</h4>
+                        <p class="text-gray-600 mb-4">
+                            Holistic approach to wellness, guided by the church's commitment to health reform.
+                        </p>
+                        <a href="#health" class="text-secondary font-semibold hover:underline">View Health Page &rarr;</a>
+                    </div>
+                    
+                    <!-- Children Focused Christian Club Card -->
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-primary">
+                        <h4 class="text-2xl font-bold text-primary mb-3">Children Focused Christian Club</h4>
+                        <p class="text-gray-600 mb-4">
+                            Creating a fun, safe, and engaging environment for children to learn about Jesus.
+                        </p>
+                        <a href="#contact" class="text-primary font-semibold hover:underline">Contact for Details &rarr;</a>
+                    </div>
+
+                    <!-- Bible Truth Workshops Card -->
+                    <div class="info-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-secondary">
+                        <h4 class="text-2xl font-bold text-primary mb-3">Bible Truth Workshops</h4>
+                        <p class="text-gray-600 mb-4">
+                            In-depth studies designed to clarify and deepen understanding of key Scriptural truths.
+                        </p>
+                        <a href="#study" class="text-secondary font-semibold hover:underline">Go to Bible Study &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- -->
+
+        <!-- === 3. BIBLE STUDY: 28 FUNDAMENTAL BELIEFS & GEMINI API === -->
+        <section id="study" class="py-16 sm:py-24 bg-white scroll-mt-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-4">Deepening Our Faith: The 28 Beliefs</h3>
+                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Structured resources for studying the foundational tenets of the Seventh-day Adventist Church.</p>
+                
+                <!-- Monthly Focus Highlight -->
+                <div class="bg-primary text-white p-6 sm:p-8 rounded-xl shadow-2xl mb-12 text-center">
+                    <span class="inline-block bg-secondary text-primary text-sm font-bold uppercase px-3 py-1 rounded-full mb-3">This Month's Focus</span>
+                    <h4 class="text-2xl sm:text-3xl font-bold">Belief #4: The Son of God</h4>
+                    <p class="mt-2 text-lg font-light max-w-3xl mx-auto">
+                        This month, we study Christ's identity, His humanity, and His divinity as our Lord and Savior.
+                    </p>
+                    <a href="https://www.adventist.org/beliefs/the-son-of-god/" target="_blank" class="mt-4 inline-block text-secondary font-semibold hover:underline">
+                        Read Official Statement &rarr;
+                    </a>
+                </div>
+
+                <!-- Belief Deep Dive Generator (Gemini API Integration) -->
+                <div class="bg-gray-100 p-8 rounded-xl shadow-lg border-t-4 border-primary">
+                    <h4 class="text-2xl font-bold text-primary mb-4 flex items-center justify-center">
+                        <span class="text-4xl mr-2">✨</span> Belief Deep Dive Generator 
+                    </h4>
+                    <p class="text-center text-gray-600 mb-6">Instantly generate a concise explanation for any belief or topic, tailored for your ministry context.</p>
+
+                    <form id="deep-dive-form" class="space-y-4">
+                        <div>
+                            <label for="belief-topic" class="block text-sm font-medium text-gray-700">Topic (Belief # or Custom):</label>
+                            <input type="text" id="belief-topic" value="The Son of God" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3">
+                        </div>
+                        <div>
+                            <label for="belief-context" class="block text-sm font-medium text-gray-700">Context/Style (e.g., Youth Devotional, New Member Class, Sermon Point):</label>
+                            <input type="text" id="belief-context" value="Short devotional thought" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-3">
+                        </div>
+                        <button type="submit" id="generate-button" class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+                            Generate Explanation
+                        </button>
+                    </form>
+
+                    <div id="result-area" class="mt-6 hidden">
+                        <h5 class="font-bold text-lg text-primary mb-2">Generated Content:</h5>
+                        <div id="output-text" class="bg-white p-4 rounded-lg border border-gray-300 whitespace-pre-wrap text-gray-700"></div>
+                        <div id="citation-sources" class="mt-3 text-xs text-gray-500"></div>
+                    </div>
+
+                    <div id="loading-spinner" class="mt-6 text-center hidden">
+                        <div class="animate-spin inline-block w-6 h-6 border-4 border-t-4 border-primary rounded-full border-t-transparent"></div>
+                        <p class="text-primary mt-2">Generating deep dive, please wait...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- -->
+
+        <!-- === 4. PRAYER MINISTRY & RECORDINGS === -->
+        <section id="prayer" class="py-16 sm:py-24 bg-gray-100 scroll-mt-24 border-t-8 border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Prayer Meeting Schedules & Live Access</h3>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Adamsville Prayer Details -->
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-lg border-l-8 border-primary">
+                        <h4 class="text-3xl font-bold text-primary mb-2">Adamsville First Church</h4>
+                        <p class="text-4xl font-extrabold text-secondary mb-4">Tuesdays, 7:00 PM (CST)</p>
+                        <div class="text-sm space-y-3">
+                            <p class="font-semibold text-gray-800">1. One Tap Mobile Dialing:</p>
+                            <a href="tel:+17018025180,,699439" class="block text-primary hover:underline font-medium">+1 (701) 802-5180,,699439</a>
+                            <p class="font-semibold text-gray-800">2. Join Online (Video & Screen Share):</p>
+                            <a href="https://join.freeconferencecall.com/kimquinnie9" target="_blank" class="block text-primary hover:underline font-medium">https://join.freeconferencecall.com/kimquinnie9</a>
+                            <p class="mt-2 text-xs text-gray-600">Dial-in: (701) 802-5180 | Access Code: 699439</p>
+                        </div>
+                    </div>
+
+                    <!-- Fairfield Prayer Details -->
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-lg border-l-8 border-secondary">
+                        <h4 class="text-3xl font-bold text-primary mb-2">Fairfield First Church</h4>
+                        <p class="text-4xl font-extrabold text-secondary mb-4">Wednesdays, 7:00 PM (CST)</p>
+                         <div class="text-sm space-y-3">
+                            <p class="font-semibold text-gray-800">1. One Tap Mobile Dialing:</p>
+                            <a href="tel:+19789905000,,956596" class="block text-primary hover:underline font-medium">+1 (978) 990-5000,,956596</a>
+                            <p class="font-semibold text-gray-800">2. Join Online (Video & Screen Share):</p>
+                            <a href="https://join.freeconferencecall.com/fairfieldsda" target="_blank" class="block text-primary hover:underline font-medium">https://join.freeconferencecall.com/fairfieldsda</a>
+                            <p class="mt-2 text-xs text-gray-600">Dial-in: (978) 990-5000 | Access Code: 956596</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prayer Recordings Archive Placeholder -->
+                <div id="prayer-recordings" class="text-center bg-white p-8 rounded-xl shadow-lg border-t-4 border-gray-200">
+                    <h4 class="text-2xl font-bold text-primary mb-4">Prayer Meeting Recordings Archive</h4>
+                    <p class="text-gray-600 mb-6 max-w-3xl mx-auto">
+                        Find past audio and video recordings here. Links will be active once recordings are uploaded to the church's media platform.
+                    </p>
+                    <div class="grid sm:grid-cols-3 gap-4">
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-200">
+                            <p class="font-semibold text-primary">Tues, Adamsville</p>
+                            <p class="text-sm text-gray-500">Placeholder: Recording Not Available</p>
+                            <a href="#" onclick="return false;" class="text-gray-400 text-sm font-medium mt-1 inline-block">Listen / Watch &rarr;</a>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-200">
+                            <p class="font-semibold text-primary">Wed, Fairfield</p>
+                            <p class="text-sm text-gray-500">Placeholder: Recording Not Available</p>
+                            <a href="#" onclick="return false;" class="text-gray-400 text-sm font-medium mt-1 inline-block">Listen / Watch &rarr;</a>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-200">
+                            <p class="font-semibold text-primary">Next Week</p>
+                            <p class="text-sm text-gray-500">Coming Soon!</p>
+                            <a href="#" onclick="return false;" class="text-gray-400 text-sm font-medium mt-1 inline-block">Listen / Watch &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- -->
+
+        <!-- === 5. HEALTH MESSAGE & FACEBOOK EMBED === -->
+        <section id="health" class="py-16 sm:py-24 bg-white scroll-mt-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-4">Health Message Ministry</h3>
+                <p class="text-xl text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+                    Following God's natural laws for a balanced, vibrant life. Get the latest updates from Fairfield's health initiatives.
+                </p>
+
+                <div class="fb-container bg-gray-200 shadow-2xl rounded-xl">
+                    <!-- Facebook Page Plugin Embed Code (Fairfield's Facebook Page) -->
+                    <!-- NOTE: You must include the Facebook SDK (at the top of <BODY>) for this to display correctly -->
+                    <div class="fb-page fb-page-embed" 
+                        data-href="https://www.facebook.com/FairfieldSDAChurchAL/" 
+                        data-tabs="timeline" 
+                        data-width="500" 
+                        data-height="500" 
+                        data-small-header="false" 
+                        data-adapt-container-width="true" 
+                        data-hide-cover="false" 
+                        data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/FairfieldSDAChurchAL/" class="fb-xfbml-parse-ignore">
+                            <a href="https://www.facebook.com/FairfieldSDAChurchAL/">Fairfield First SDA Church</a>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- -->
+
+        <!-- === 6. CHURCH CALENDARS & EXTERNAL LINKS === -->
+        <section id="calendars" class="py-16 sm:py-24 bg-gray-100 scroll-mt-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Church Calendars & Important Links</h3>
+
+                <!-- External Quick Links -->
+                <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
+                    
+                    <!-- Official Church Websites -->
+                    <a href="https://firstal.adventistchurch.org" target="_blank" class="info-card block p-6 text-center rounded-xl shadow-lg bg-blue-50 border-b-4 border-primary hover:bg-blue-100">
+                        <span class="text-3xl block mb-1">🔗</span>
+                        <h4 class="text-lg font-bold text-primary">Adamsville Website</h4>
+                    </a>
+                    <a href="https://firstfairfieldal.adventistchurch.org" target="_blank" class="info-card block p-6 text-center rounded-xl shadow-lg bg-blue-50 border-b-4 border-secondary hover:bg-blue-100">
+                        <span class="text-3xl block mb-1">🔗</span>
+                        <h4 class="text-lg font-bold text-primary">Fairfield Website</h4>
+                    </a>
+
+                    <!-- Flocknote Links -->
+                    <a href="https://firstfairfield.flocknote.com/home" target="_blank" class="info-card block p-6 text-center rounded-xl shadow-lg bg-blue-50 border-b-4 border-primary hover:bg-blue-100">
+                        <span class="text-3xl block mb-1">🔔</span>
+                        <h4 class="text-lg font-bold text-primary">Fairfield Flocknote</h4>
+                    </a>
+                    <a href="https://firstfairfield.flocknote.com/home" target="_blank" class="info-card block p-6 text-center rounded-xl shadow-lg bg-blue-50 border-b-4 border-secondary hover:bg-blue-100">
+                        <span class="text-3xl block mb-1">🔔</span>
+                        <h4 class="text-lg font-bold text-primary">Adamsville Flocknote</h4>
+                    </a>
+                    
+                    <!-- Pastor Appointment Link -->
+                    <a href="https://calendar.app.google/gQKhR59wVHjAyBMh6" target="_blank" class="info-card block p-6 text-center rounded-xl shadow-lg bg-blue-50 border-b-4 border-primary hover:bg-blue-100 lg:col-span-1">
+                        <span class="text-3xl block mb-1">📅</span>
+                        <h4 class="text-lg font-bold text-primary">Book an Appointment</h4>
+                    </a>
+                </div>
+
+                <!-- Live Embedded Calendars -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    
+                    <!-- Adamsville Calendar Embed -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-primary mb-3">Adamsville Church Calendar</h4>
+                        <div class="calendar-wrapper">
+                            <iframe src="https://calendar.google.com/calendar/embed?src=family08139883054876016043%40group.calendar.google.com&ctz=America%2FChicago" style="border: 0" frameborder="0" scrolling="no"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Fairfield Calendar Embed -->
+                    <div>
+                        <h4 class="text-2xl font-bold text-primary mb-3">Fairfield Church Calendar</h4>
+                        <div class="calendar-wrapper">
+                            <iframe src="https://calendar.google.com/calendar/embed?src=a0d9f1e74131505d22f9e1fbd9716a48b9ed57b47cb881d3c48f51993aac7af3%40group.calendar.google.com&ctz=America%2FChicago" style="border: 0" frameborder="0" scrolling="no"></iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- --- -->
+
+        <!-- === 7. CONTACT & ADMIN PORTALS === -->
+        <section id="contact" class="py-16 sm:py-24 bg-white scroll-mt-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-extrabold text-center text-primary mb-12">Connect with the Ministry</h3>
+
+                <div class="grid md:grid-cols-2 gap-10">
+
+                    <!-- Pastor Contact Form -->
+                    <div id="contact-pastor" class="bg-gray-50 p-6 rounded-xl shadow-xl border-t-4 border-secondary">
+                        <h4 class="text-2xl font-bold text-primary mb-4">Message Pastor Carlyle</h4>
+                        <p class="text-gray-600 mb-4">Use this form for personal communication, private questions, or prayer requests. Messages will be sent directly to the Pastor's email.</p>
+                        
+                        <form id="pastor-contact-form" onsubmit="handlePastorContact(event)" class="space-y-4">
+                            <div>
+                                <label for="sender-name" class="block text-sm font-medium text-gray-700">Your Name</label>
+                                <input type="text" id="sender-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
+                            </div>
+                            <div>
+                                <label for="sender-email" class="block text-sm font-medium text-gray-700">Your Email</label>
+                                <input type="email" id="sender-email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
+                            </div>
+                            <div>
+                                <label for="message-subject" class="block text-sm font-medium text-gray-700">Subject</label>
+                                <input type="text" id="message-subject" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
+                            </div>
+                            <div>
+                                <label for="message-body" class="block text-sm font-medium text-gray-700">Message</label>
+                                <textarea id="message-body" rows="4" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-secondary text-primary font-bold py-3 px-4 rounded-lg hover:bg-yellow-500 transition duration-300">
+                                Send Message
+                            </button>
+                            <p id="contact-status" class="mt-3 text-center text-sm text-green-600 hidden"></p>
+                        </form>
+                    </div>
+
+                    <!-- Board Member Portal -->
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-xl border-t-4 border-primary">
+                        <h4 class="text-2xl font-bold text-primary mb-4">Board Member Submission Portal</h4>
+                        <p class="text-gray-600 mb-6">
+                            This area is for church board members and leaders to submit administrative content, reports, or meeting items directly to the Pastor's office.
+                        </p>
+                        <!-- For security, this is a placeholder. Real implementation would require a dedicated login system. -->
+                        <form id="board-submission-form" onsubmit="handleBoardSubmission(event)" class="space-y-4">
+                            <div>
+                                <label for="board-member-name" class="block text-sm font-medium text-gray-700">Your Name & Role</label>
+                                <input type="text" id="board-member-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
+                            </div>
+                            <div>
+                                <label for="submission-type" class="block text-sm font-medium text-gray-700">Submission Type</label>
+                                <select id="submission-type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3">
+                                    <option value="">Select Type</option>
+                                    <option value="report">Committee Report</option>
+                                    <option value="agenda">Agenda Item Request</option>
+                                    <option value="announcement">Official Announcement</option>
+                                    <option value="other">Other Administrative Content</option>
+                                </select>
+                            </div>
+                             <div>
+                                <label for="submission-summary" class="block text-sm font-medium text-gray-700">Brief Summary</label>
+                                <textarea id="submission-summary" rows="3" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+                                Submit Administrative Content
+                            </button>
+                            <p id="board-status" class="mt-3 text-center text-sm text-green-600 hidden"></p>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; <span id="year"></span> Carlyle Ministries. All Rights Reserved. </p>
+            <p class="mt-2 text-gray-400">Serving First Adamsville SDA and First Fairfield SDA Churches.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- GLOBAL INITIALIZATION AND HELPER FUNCTIONS ---
+
+        // Get current year for footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        document.getElementById('menu-button').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // --- CONTACT FORM HANDLERS ---
+
+        // Handler for Pastor Contact Form (uses mailto: for simplicity and privacy)
+        function handlePastorContact(event) {
+            event.preventDefault();
+            const name = document.getElementById('sender-name').value;
+            const email = document.getElementById('sender-email').value;
+            const subject = document.getElementById('message-subject').value;
+            const body = document.getElementById('message-body').value;
+            const status = document.getElementById('contact-status');
+
+            // Set the target email address
+            const targetEmail = "pastorcarlyle@gmail.com";
+
+            const mailtoSubject = encodeURIComponent(`Ministry Inquiry: ${subject}`);
+            const mailtoBody = encodeURIComponent(
+                `Name: ${name}\n` +
+                `Email: ${email}\n\n` +
+                `---\n\n` +
+                `${body}`
+            );
+
+            // Opens the user's default email client
+            window.location.href = `mailto:${targetEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+            // Provide user feedback that the email client is opening
+            status.textContent = "Your email client is opening to draft the message!";
+            status.classList.remove('hidden');
+            setTimeout(() => {
+                status.classList.add('hidden');
+                document.getElementById('pastor-contact-form').reset();
+            }, 5000); 
+        }
+
+        // Handler for Board Submission Form (Placeholder for administrative content)
+        function handleBoardSubmission(event) {
+            event.preventDefault();
+            const status = document.getElementById('board-status');
+            
+            // In a real application, this would use Firestore to save data or an external service.
+            // For this single-file app, we'll provide a success message.
+            
+            status.textContent = "Submission Sent (Placeholder)! Please follow up with the Pastor via email.";
+            status.classList.remove('hidden', 'text-green-600');
+            status.classList.add('text-orange-500');
+
+            setTimeout(() => {
+                status.classList.add('hidden');
+                document.getElementById('board-submission-form').reset();
+            }, 7000);
+        }
+
+        // --- GEMINI API DEEP DIVE GENERATOR ---
+        
+        // IMPORTANT: The apiKey is left blank. The runtime environment (Canvas) will provide it.
+        const apiKey = "";
+        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        // Utility function for exponential backoff retry logic
+        async function fetchWithRetry(url, options, retries = 3) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        // Throw error if response is not ok (e.g., 400, 500)
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response;
+                } catch (error) {
+                    if (i === retries - 1) throw error;
+                    // Exponential backoff: 1s, 2s, 4s delay
+                    const delay = Math.pow(2, i) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+
+        async function handleGenerateDeepDive(event) {
+            event.preventDefault();
+
+            const topic = document.getElementById('belief-topic').value;
+            const context = document.getElementById('belief-context').value;
+            const outputText = document.getElementById('output-text');
+            const citationSources = document.getElementById('citation-sources');
+            const resultArea = document.getElementById('result-area');
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            // 1. UI State: Start Loading
+            resultArea.classList.add('hidden');
+            loadingSpinner.classList.remove('hidden');
+            outputText.textContent = '';
+            citationSources.innerHTML = '';
+            
+            // 2. Define Prompts
+            const systemPrompt = "You are a thoughtful, concise, and academically sound Seventh-day Adventist theologian and devotional writer. Your task is to explain complex theological topics (like the 28 Fundamental Beliefs) in a clear, accessible, and faith-affirming manner. Keep the output focused, direct, and limited to a single paragraph (max 150 words). Do not use lists or bullet points. When appropriate, use the Google Search tool for grounding.";
+            
+            const userQuery = `Write a short theological explanation about "${topic}". The explanation must be tailored for the context of a "${context}" audience.`;
+
+            // 3. Construct API Payload
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                tools: [{ "google_search": {} }], // Enable grounding
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            const options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            };
+
+            try {
+                // 4. API Call with Retry
+                const response = await fetchWithRetry(GEMINI_API_URL, options);
+                const result = await response.json();
+                
+                // 5. Process Response
+                const candidate = result.candidates?.[0];
+                const text = candidate?.content?.parts?.[0]?.text || "Error: Could not generate content. Please try a different topic.";
+
+                let sources = [];
+                const groundingMetadata = candidate?.groundingMetadata;
+                if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                    sources = groundingMetadata.groundingAttributions
+                        .map(attribution => ({
+                            uri: attribution.web?.uri,
+                            title: attribution.web?.title,
+                        }))
+                        .filter(source => source.uri && source.title);
+                }
+
+                // 6. UI State: Display Result
+                outputText.textContent = text;
+                resultArea.classList.remove('hidden');
+
+                if (sources.length > 0) {
+                    const uniqueSources = Array.from(new Set(sources.map(s => s.uri)))
+                        .map(uri => sources.find(s => s.uri === uri));
+
+                    citationSources.innerHTML = `<p class="font-semibold mt-2">Sources Consulted:</p>` + 
+                        uniqueSources.map((s, index) => 
+                            `<a href="${s.uri}" target="_blank" class="block text-blue-600 hover:underline">${index + 1}. ${s.title}</a>`
+                        ).join('');
+                } else {
+                     citationSources.innerHTML = `<p class="mt-2 text-sm text-gray-500">No external sources used for this foundational response.</p>`;
+                }
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                outputText.textContent = "An error occurred while connecting to the ministry's deep dive engine. Please check your connection or try again later.";
+                resultArea.classList.remove('hidden');
+                citationSources.innerHTML = '';
+            } finally {
+                // 7. UI State: Stop Loading
+                loadingSpinner.classList.add('hidden');
+            }
+        }
+
+        // Attach event listener after the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const deepDiveForm = document.getElementById('deep-dive-form');
+            if (deepDiveForm) {
+                deepDiveForm.addEventListener('submit', handleGenerateDeepDive);
+            }
+        });
+    </script>
+</body>
+</html>
